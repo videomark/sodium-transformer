@@ -122,10 +122,10 @@ node app.js -g --opendata --sessionMaskSeed 1234567890123456 --withoutMongo --ou
 
 ## マスク、置き換え、または、取り除くデータ
 
--   協力会社
+-   分析用ログデータ用の処理
     -   視聴数の少ないYouTubeのURLの末尾部分
         -   例: <https://www.youtube.com/watch?v=7qTxcaEcz-g> -> <https://www.youtube.com>
--   学会 (OpenData)
+-   [オープンデータ](https://vm.webdino.org/opendata)用の処理
     -   IPアドレスを取り除く
     -   サービス名
     -   動画URL(location)を取り除く
