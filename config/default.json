@@ -24,7 +24,7 @@
   },
   "mask": {
     "terminal": "Android [0-9.]+;([-0-9A-Za-z/._ ]+)\\)",
-    "ua": "^Mozilla\\/5.0 \\([-0-9A-Za-z._ ]+;[-0-9A-Za-z._ ]+(;[-0-9A-Za-z/._ ]+)?\\) AppleWebKit\\/[0-9.]+ \\(KHTML, like Gecko\\)([-0-9A-Za-z/._ ]+)? Chrome\\/[0-9.]+ (Mobile )?Safari\\/[0-9.]+( (Vivaldi|Edg)\\/[0-9.]+)?$",
+    "ua": "^Mozilla\\/5.0 \\([-0-9A-Za-z._ ]+(;[-0-9A-Za-z/._: ]+)*\\) (AppleWebKit|Gecko)\\/[0-9.]+( \\(KHTML, like Gecko\\)([-0-9A-Za-z/._ ]+)?)? (Chrome|Firefox)\\/[0-9.]+( (Mobile )?Safari\\/[0-9.]+)?( (Vivaldi|Edg|SeaMonkey)\\/[0-9.]+)?$",
     "session": "sodium|deadbeef-dead-beef-dead-beefdeadbeef|webdino-jetson-1\\.photo\\.webdino\\.org|webdino-jetson-2\\.photo\\.webdino\\.org|webdino-jetson-3\\.photo\\.webdino\\.org|docker\\.io\\/videomark\\/sodium-bot\\:v1\\.0\\.0-f",
     "youtube": {
       "min": 100
