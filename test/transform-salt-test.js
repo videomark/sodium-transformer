@@ -610,3 +610,10 @@ describe("SaltTransform generateCmHistory test", () => {
 
     });
 });
+
+describe("SaltTransform.prototype.create test", () => {
+    const saltTransform = new SaltTransform();
+    const inputJson = require("../test-data/sodium-sample.json");
+    const output = saltTransform.create(inputJson);
+    it("output.session.qoe", () => assert.strictEqual(output.session.qoe, null));
+});

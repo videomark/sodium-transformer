@@ -85,7 +85,7 @@ class SaltTransform extends Transform {
                         browser: `${browser}${browserVer}`,
                         original: session.userAgent
                     },
-                    qoe: 4.2 // DBに問い合わせることにしようと思っている
+                    qoe: null
                 },
                 connection: {
                     type: session.netinfo ? session.netinfo.type : undefined,
