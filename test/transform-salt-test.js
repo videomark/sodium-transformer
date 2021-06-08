@@ -1,4 +1,5 @@
 const assert = require("assert");
+const expect = require("chai").expect;
 const { beforeEach, describe, it, afterEach } = require("mocha");
 
 const SaltTransform = require("../src/transform/salt");
@@ -616,4 +617,13 @@ describe("SaltTransform.prototype.create test", () => {
     const inputJson = require("../test-data/sodium-sample.json");
     const output = saltTransform.create(inputJson);
     it("output.session.qoe", () => assert.strictEqual(output.session.qoe, null));
+    it("output.session.type", () => expect(["social", "personal"]).to.include(output.session.type));
+});
+
+describe("SaltTransform.prototype.create test 2", () => {
+    const saltTransform = new SaltTransform();
+    const inputJson = require("../test-data/sodium-sample2.json");
+    const output = saltTransform.create(inputJson);
+    it("output.session.qoe", () => assert.strictEqual(output.session.qoe, null));
+    it("output.session.type", () => expect(["social", "personal"]).to.include(output.session.type));
 });

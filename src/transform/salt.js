@@ -77,9 +77,11 @@ class SaltTransform extends Transform {
 
             const serverHost = new URL(session.location).host;
 
-            var session_type = session.session_type ? session.session_type : "social";
-            if (uuidVersion(session.session) == 4)
-                session_type = "social";
+            let sessionType = "social";
+            if ('session_type' in session)
+                sessionType = session.session_type;
+            if (uuidVersion(session.session) === 4)
+                sessionType = "social";
 
             const salt = {
                 session: {
@@ -90,7 +92,7 @@ class SaltTransform extends Transform {
                         browser: `${browser}${browserVer}`,
                         original: session.userAgent
                     },
-                    session_type: session_type,
+                    type: sessionType,
                     qoe: null
                 },
                 connection: {
