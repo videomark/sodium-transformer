@@ -85,6 +85,7 @@ class SaltTransform extends Transform {
                         browser: `${browser}${browserVer}`,
                         original: session.userAgent
                     },
+                    session_type: session.session_type ? session.session_type : "personal",
                     qoe: null
                 },
                 connection: {
