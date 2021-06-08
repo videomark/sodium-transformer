@@ -1,4 +1,5 @@
 const { Transform } = require('stream');
+const { version : uuidVersion } = require('uuid');
 
 const log4js = require("log4js");
 const NodeCache = require("node-cache");
@@ -76,6 +77,10 @@ class SaltTransform extends Transform {
 
             const serverHost = new URL(session.location).host;
 
+            var session_type = session.session_type ? session.session_type : "social";
+            if (uuidVersion(session.session) == 4)
+                session_type = "social";
+
             const salt = {
                 session: {
                     sodiumSessionId: session.session,
@@ -85,7 +90,7 @@ class SaltTransform extends Transform {
                         browser: `${browser}${browserVer}`,
                         original: session.userAgent
                     },
-                    session_type: session.session_type ? session.session_type : "social",
+                    session_type: session_type,
                     qoe: null
                 },
                 connection: {
