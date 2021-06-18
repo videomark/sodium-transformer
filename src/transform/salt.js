@@ -1,11 +1,10 @@
 const { Transform } = require('stream');
-const { version : uuidVersion } = require('uuid');
-
 const log4js = require("log4js");
 const NodeCache = require("node-cache");
 const UAParser = require("ua-parser-js");
 // eslint-disable-next-line camelcase
 const holiday_jp = require("@holiday-jp/holiday_jp");
+const getSessionType = require("../utils/getSessionType");
 
 const logger = log4js.getLogger("app");
 
@@ -77,11 +76,8 @@ class SaltTransform extends Transform {
 
             const serverHost = new URL(session.location).host;
 
-            let sessionType = "social";
-            if ('session_type' in session)
-                sessionType = session.session_type;
-            if (uuidVersion(session.session) === 4)
-                sessionType = "social";
+            let sessionType = getSessionType(session.session);
+            if ("sessionType" in session) sessionType = session.sessionType;
 
             const salt = {
                 session: {
