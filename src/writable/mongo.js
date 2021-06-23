@@ -59,14 +59,25 @@ class MongoWritable extends Writable {
             // insert
             ret = await this.collection.updateOne({
                 "id": salt.session.sodiumVideoId,
-            }, {
-                "$set": {
-                    session: salt.session,
-                    connection: salt.connection,
-                    network: salt.network,
-                    video: salt.video,
+            }, [
+                {
+                  "$project": { id: 1, session: 1, "_qoe": "$session.qoe" }
+                }, {
+                    "$set": {
+                        id: "$id",
+                        session: salt.session,
+                        connection: salt.connection,
+                        network: salt.network,
+                        video: salt.video,
+                    }
+                }, {
+                    "$set": {
+                        "session.qoe": { $ifNull: [ "$_qoe", salt.session.qoe ] }
+                    }
+                }, {
+                    "$unset": [ "_qoe" ]
                 }
-            }, {
+            ], {
                 "upsert": true
             });
         }
@@ -74,14 +85,25 @@ class MongoWritable extends Writable {
 
         const ret = await this.collection.updateOne({
             "id": salt.session.sodiumVideoId,
-        }, {
-            "$set": {
-                session: salt.session,
-                connection: salt.connection,
-                network: salt.network,
-                video: salt.video,
+        }, [
+            {
+              "$project": { id: 1, session: 1, "_qoe": "$session.qoe" }
+            }, {
+                "$set": {
+                    id: "$id",
+                    session: salt.session,
+                    connection: salt.connection,
+                    network: salt.network,
+                    video: salt.video,
+                }
+            }, {
+                "$set": {
+                    "session.qoe": { $ifNull: [ "$_qoe", salt.session.qoe ] }
+                }
+            }, {
+                "$unset": [ "_qoe" ]
             }
-        }, {
+        ], {
             "upsert": true
         });
 
