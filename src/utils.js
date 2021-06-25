@@ -166,8 +166,8 @@ class Utils {
     }
 
     static genPath(dir, file, sufix, ext) {
-        const org = path.basename(file).split(".").slice(0, 2).join("_")
-        const base = [`${org}_${sufix}`, ext].join(".")
+        const org = path.basename(file).replace(/\.log(:?\.gz)?$/i, "").split(".").join("_");
+        const base = `${org}_${sufix}.${ext}`;
         return [dir, base].join(path.sep);
     }
 }
