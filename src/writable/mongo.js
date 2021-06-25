@@ -1,5 +1,6 @@
 const { Writable } = require("stream");
 
+const flatten = require("flat");
 const log4js = require("log4js");
 
 const logger = log4js.getLogger("app");
@@ -76,7 +77,7 @@ class MongoWritable extends Writable {
             "id": salt.session.sodiumVideoId,
         }, {
             "$set": {
-                session: salt.session,
+                ...flatten({ session: salt.session }),
                 connection: salt.connection,
                 network: salt.network,
                 video: salt.video,
