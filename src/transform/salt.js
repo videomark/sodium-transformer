@@ -89,7 +89,6 @@ class SaltTransform extends Transform {
                         original: session.userAgent
                     },
                     type: sessionType,
-                    qoe: null
                 },
                 connection: {
                     type: session.netinfo ? session.netinfo.type : undefined,
