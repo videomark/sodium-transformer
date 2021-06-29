@@ -15,7 +15,7 @@ class FilterTransform extends Transform {
           const ret = str.match(new RegExp(options.fluentFormat))
           if (!ret) return
           if (ret.length !== 4) return
-          if (ret[2] !== FLUENT_TAG) return
+          if (!ret[2].startsWith(FLUENT_TAG)) return
           // TODO USER AGENT によるフィルタは廃止するかどうか
           const { userAgent, location } = JSON.parse(ret[3])
           if (
