@@ -89,6 +89,7 @@ class SaltTransform extends Transform {
                         original: session.userAgent
                     },
                     type: sessionType,
+                    location: session.location
                 },
                 connection: {
                     type: session.netinfo ? session.netinfo.type : undefined,
@@ -287,7 +288,8 @@ class SaltTransform extends Transform {
                     videoCodec,
                     audioCodec,
                     videoTargetBitrate,
-                    audioTargetBitrate
+                    audioTargetBitrate,
+                    serverIp: e.serverIp,
                 }
             });
     }
