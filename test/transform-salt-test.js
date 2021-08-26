@@ -308,6 +308,7 @@ describe("SaltTransform generatePlayList test", () => {
             assert.equal(e.resolution.height, sample[i].videoHeight);
             assert.equal(e.resolution.width, sample[i].videoWidth);
             assert.equal(e.container, sample[i].container);
+            assert.equal(e.domainName , sample[i].serverIp);
             if (e.resolution.height === -1 && e.resolution.width === -1) {
                 assert.equal(e.audioCodec, sample[i].codec);
                 assert.equal(e.audioTargetBitrate, sample[i].bps);
