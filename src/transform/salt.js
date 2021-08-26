@@ -289,7 +289,7 @@ class SaltTransform extends Transform {
                     audioCodec,
                     videoTargetBitrate,
                     audioTargetBitrate,
-                    serverIp: e.serverIp,
+                    domainName: e.serverIp,
                 }
             });
     }
