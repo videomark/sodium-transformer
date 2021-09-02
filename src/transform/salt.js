@@ -109,7 +109,8 @@ class SaltTransform extends Transform {
                         country: session.country,
                         subdivision: session.subdivision
                     },
-                    isp: session.isp
+                    isp: session.isp,
+                    asNumber: session.asNumber
                 },
                 video: {
                     videoId: video.property.holderId,
