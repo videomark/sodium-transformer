@@ -631,5 +631,5 @@ describe("SaltTransform.prototype.create test 3", () => {
     const saltTransform = new SaltTransform();
     const inputJson = require("../test-data/sodium-sample3.json");
     const output = saltTransform.create(inputJson);
-    it("output.network.asNumber", () => expect("2527").to.equal(output.network.asNumber));
+    it("output.network.asn", () => expect("2527").to.equal(output.network.asn));
 });
