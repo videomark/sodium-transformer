@@ -69,7 +69,11 @@ class SaltTransform extends Transform {
             const throughputHistory = SaltTransform.generateThroughputHistory(video.throughput_info)
             const eventHistory = SaltTransform.generateEventHistory(video);
             const representations = SaltTransform.generatePlayList(video.play_list_info);
-            const representationHistory = SaltTransform.generateRepresentationHistory(video.playback_quality, {});
+            let representationHistory;
+            if (representations.length > 0) 
+                representationHistory = SaltTransform.generateRepresentationHistory(video.playback_quality, {}, representations);
+            else
+                representationHistory = SaltTransform.generateRepresentationHistoryFromProperty(video.property, {})
             const frameDropHistory = SaltTransform.generateDropHistory(video.playback_quality, []);
             const { val: cmHistory, cm } = SaltTransform.generateCmHistory(video.cmHistory, {});
             // const bufferHistory
@@ -155,8 +159,14 @@ class SaltTransform extends Transform {
 
             const currentRep = salt.video.playHistory.representationHistory.length > 0
                 ? salt.video.playHistory.representationHistory[salt.video.playHistory.representationHistory.length - 1] : {}
-            salt.video.playHistory.representationHistory = Array.prototype
-                .concat(salt.video.playHistory.representationHistory, SaltTransform.generateRepresentationHistory(video.playback_quality, currentRep))
+            if (salt.video.representations.length > 0) 
+                salt.video.playHistory.representationHistory = Array.prototype
+                    .concat(salt.video.playHistory.representationHistory, 
+                        SaltTransform.generateRepresentationHistory(video.playback_quality, currentRep, salt.video.representations));
+            else 
+                salt.video.playHistory.representationHistory = Array.prototype
+                    .concat(salt.video.playHistory.representationHistory, 
+                        SaltTransform.generateRepresentationHistoryFromProperty(video.property, currentRep));
 
             salt.video.playHistory.frameDropHistory = SaltTransform.generateDropHistory(video.playback_quality, salt.video.playHistory.frameDropHistory)
 
@@ -315,7 +325,7 @@ class SaltTransform extends Transform {
     }
 
     // eslint-disable-next-line camelcase
-    static generateRepresentationHistory(playback_quality, last) {
+    static generateRepresentationHistory(playback_quality, last, representation) {
 
         // eslint-disable-next-line camelcase
         if (!Array.isArray(playback_quality) || playback_quality.length === 0) return [];
@@ -324,12 +334,22 @@ class SaltTransform extends Transform {
         return playback_quality
             .filter(e => e.representation && e.creationDate)
             .map(e => {
-                if (e.representation.video && e.representation.audio)
+                if (e.representation.video && e.representation.audio) {
+                    let videoWidth = -1;
+                    let videoHeight = -1;
+                    const selectedVideo = representation.find(rep => rep.id === e.representation.video);
+                    if (selectedVideo?.resolution){
+                        videoWidth = selectedVideo.resolution.width;
+                        videoHeight = selectedVideo.resolution.height;  
+                    }
                     return {
                         video: e.representation.video,
                         audio: e.representation.audio,
+                        videoWidth,
+                        videoHeight,
                         time: e.creationDate
                     }
+                }
                 return { // IIJ 対応 TODO IIJ も {video, audio} のフォーマットにする
                     video: e.representation,
                     audio: -1,
@@ -344,6 +364,21 @@ class SaltTransform extends Transform {
                 }
                 return acc;
             }, []);
+    }
+
+     // eslint-disable-next-line camelcase
+     static generateRepresentationHistoryFromProperty(property, last) {
+        if (last.videoWidth != property.videoWidth && last.videoHeight != property.videoHeight) {
+            return [{
+                video: -1,
+                audio: -1,
+                videoWidth: property.videoWidth,
+                videoHeight: property.videoHeight,
+                time: property.playStartTime + (property.currentPlayTime * 1000)
+            }]
+        } else {
+            return [];
+        }
     }
 
     static generateCmHistory(cmHistory, context) {

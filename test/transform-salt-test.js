@@ -470,19 +470,46 @@ describe("SaltTransform generateRepresentationHistory test", () => {
         }
     ];
 
+    const playListInfo = [
+        {
+            "id": "11",
+            "resolution": {
+                "height": 480,
+                "width": 640
+            },
+        },
+        {
+            "id": "33",
+            "resolution": {
+                "height": 720,
+                "width": 1024
+            },
+        },
+        {
+            "id": "55",
+            "resolution": {
+                "height": 1080,
+                "width": 1920
+            },
+        }
+    ];
+
+
     beforeEach(async () => {
 
     });
 
     it("success1", async () => {
 
-        const ret = SaltTransform.generateRepresentationHistory(sample, {});
+        const ret = SaltTransform.generateRepresentationHistory(sample, {}, playListInfo);
 
         assert.equal(ret.length, sample.length);
 
         ret.forEach((e, i) => {
             assert.equal(e.video, sample[i].representation.video);
             assert.equal(e.audio, sample[i].representation.audio);
+            assert.equal(e.videoWidth, playListInfo[i].resolution.width);
+            assert.equal(e.videoHeight, playListInfo[i].resolution.height);
             assert.equal(e.time, sample[i].creationDate);
         });
     });
@@ -492,13 +519,15 @@ describe("SaltTransform generateRepresentationHistory test", () => {
         const ret = SaltTransform.generateRepresentationHistory(sample, {
             video: "11",
             audio: "22"
-        });
+        }, playListInfo);
 
         assert.equal(ret.length, sample.length - 1);
 
         ret.forEach((e, i) => {
             assert.equal(e.video, sample[i + 1].representation.video);
             assert.equal(e.audio, sample[i + 1].representation.audio);
+            assert.equal(e.videoHeight, playListInfo[i + 1].resolution.height);
+            assert.equal(e.time, sample[i + 1].creationDate);
             assert.equal(e.time, sample[i + 1].creationDate);
         });
     });
@@ -520,6 +549,66 @@ describe("SaltTransform generateRepresentationHistory test", () => {
         const ret = SaltTransform.generateRepresentationHistory(history, {});
 
         assert.equal(ret.length, 0);
+    });
+
+    afterEach(async () => {
+
+    });
+});
+
+
+describe("SaltTransform generateRepresentationHistoryFromProperty test", () => {
+
+    properties = [
+        {
+            videoWidth: 640,
+            videoHeight: 480,
+            playStartTime: 1630556744452.0,
+            currentPlayTime: 5.0
+        },
+        {
+            videoWidth: 1024,
+            videoHeight: 720,
+            playStartTime: 1630556744452.0,
+            currentPlayTime: 10.0
+        },
+    ]
+
+
+    beforeEach(async () => {
+
+    });
+
+    it("success1", async () => {
+
+        const [ret] = SaltTransform.generateRepresentationHistoryFromProperty(properties[0], {});
+
+        assert.equal(ret.video, -1);
+        assert.equal(ret.audio, -1);
+        assert.equal(ret.videoWidth, properties[0].videoWidth);
+        assert.equal(ret.videoHeight, properties[0].videoHeight);
+        assert.equal(ret.time, properties[0].playStartTime + (properties[0].currentPlayTime * 1000));
+    });
+
+    it("continue", async () => {
+
+        const ret = [{
+            video: -1,
+            audio: -1,
+            videoWidth: 640,
+            videoHeight: 480,
+            time: properties[0].playStartTime + (properties[0].currentPlayTime * 1000)
+        }];
+
+        ret.push(...SaltTransform.generateRepresentationHistoryFromProperty(properties[1], ret[0]));
+
+        ret.forEach((e, i) => {
+            assert.equal(e.video, -1);
+            assert.equal(e.audio, -1);
+            assert.equal(e.videoWidth, properties[i].videoWidth);
+            assert.equal(e.videoHeight, properties[i].videoHeight);
+            assert.equal(e.time,  properties[i].playStartTime + (properties[i].currentPlayTime * 1000));
+        });
     });
 
     afterEach(async () => {
