@@ -338,7 +338,7 @@ class SaltTransform extends Transform {
                     let videoWidth = -1;
                     let videoHeight = -1;
                     const selectedVideo = representation.find(rep => rep.id === e.representation.video);
-                    if (selectedVideo?.resolution){
+                    if (selectedVideo && selectedVideo.resolution){
                         videoWidth = selectedVideo.resolution.width;
                         videoHeight = selectedVideo.resolution.height;  
                     }
