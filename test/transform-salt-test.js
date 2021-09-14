@@ -9,10 +9,6 @@ const print = console.log;
 
 describe("SaltTransform generateEventHistory test", () => {
 
-    beforeEach(async () => {
-
-    });
-
     it("success", async () => {
 
         const v = [{
@@ -104,9 +100,6 @@ describe("SaltTransform generateEventHistory test", () => {
         assert.equal(ret.length, 0);
     });
 
-    afterEach(async () => {
-
-    });
 });
 
 
@@ -157,10 +150,6 @@ describe("SaltTransform generateDropHistory test", () => {
         deltaDroppedVideoFrames: 0,
         deltaTime: 1001.2800000840798
     }
-
-    beforeEach(async () => {
-
-    });
 
     it("success1", async () => {
 
@@ -244,9 +233,6 @@ describe("SaltTransform generateDropHistory test", () => {
         assert.equal(ret[0].totalFrames, sample[2].totalVideoFrames);
     });
 
-    afterEach(async () => {
-
-    });
 });
 
 describe("SaltTransform generatePlayList test", () => {
@@ -293,10 +279,6 @@ describe("SaltTransform generatePlayList test", () => {
         serverIp: "r4---sn-nvoxu-ioqel.googlevideo.com"
     }];
 
-    beforeEach(async () => {
-
-    });
-
     it("success", async () => {
 
         const ret = SaltTransform.generatePlayList(sample);
@@ -326,9 +308,6 @@ describe("SaltTransform generatePlayList test", () => {
         assert.equal(ret.length, 0);
     });
 
-    afterEach(async () => {
-
-    });
 });
 
 describe("SaltTransform generateThroughputHistory test", () => {
@@ -374,10 +353,6 @@ describe("SaltTransform generateThroughputHistory test", () => {
         bitrate: 761081,
         representationId: "244"
     }]
-
-    beforeEach(async () => {
-
-    });
 
     it("success1", async () => {
 
@@ -441,9 +416,6 @@ describe("SaltTransform generateThroughputHistory test", () => {
         assert.equal(ret.length, 0);
     });
 
-    afterEach(async () => {
-
-    });
 });
 
 describe("SaltTransform generateRepresentationHistory test", () => {
@@ -470,19 +442,41 @@ describe("SaltTransform generateRepresentationHistory test", () => {
         }
     ];
 
-    beforeEach(async () => {
-
-    });
+    const playListInfo = [
+        {
+            "id": "11",
+            "resolution": {
+                "height": 480,
+                "width": 640
+            },
+        },
+        {
+            "id": "33",
+            "resolution": {
+                "height": 720,
+                "width": 1024
+            },
+        },
+        {
+            "id": "55",
+            "resolution": {
+                "height": 1080,
+                "width": 1920
+            },
+        }
+    ];
 
     it("success1", async () => {
 
-        const ret = SaltTransform.generateRepresentationHistory(sample, {});
+        const ret = SaltTransform.generateRepresentationHistory(sample, {}, playListInfo);
 
         assert.equal(ret.length, sample.length);
 
         ret.forEach((e, i) => {
             assert.equal(e.video, sample[i].representation.video);
             assert.equal(e.audio, sample[i].representation.audio);
+            assert.equal(e.videoWidth, playListInfo[i].resolution.width);
+            assert.equal(e.videoHeight, playListInfo[i].resolution.height);
             assert.equal(e.time, sample[i].creationDate);
         });
     });
@@ -492,13 +486,15 @@ describe("SaltTransform generateRepresentationHistory test", () => {
         const ret = SaltTransform.generateRepresentationHistory(sample, {
             video: "11",
             audio: "22"
-        });
+        }, playListInfo);
 
         assert.equal(ret.length, sample.length - 1);
 
         ret.forEach((e, i) => {
             assert.equal(e.video, sample[i + 1].representation.video);
             assert.equal(e.audio, sample[i + 1].representation.audio);
+            assert.equal(e.videoHeight, playListInfo[i + 1].resolution.height);
+            assert.equal(e.time, sample[i + 1].creationDate);
             assert.equal(e.time, sample[i + 1].creationDate);
         });
     });
@@ -522,9 +518,58 @@ describe("SaltTransform generateRepresentationHistory test", () => {
         assert.equal(ret.length, 0);
     });
 
-    afterEach(async () => {
+});
 
+
+describe("SaltTransform generateRepresentationHistoryFromProperty test", () => {
+
+    const properties = [
+        {
+            videoWidth: 640,
+            videoHeight: 480,
+            playStartTime: 1630556744452.0,
+            currentPlayTime: 5.0
+        },
+        {
+            videoWidth: 1024,
+            videoHeight: 720,
+            playStartTime: 1630556744452.0,
+            currentPlayTime: 10.0
+        },
+    ]
+
+    it("success1", async () => {
+
+        const [ret] = SaltTransform.generateRepresentationHistoryFromProperty(properties[0], {});
+
+        assert.equal(ret.video, -1);
+        assert.equal(ret.audio, -1);
+        assert.equal(ret.videoWidth, properties[0].videoWidth);
+        assert.equal(ret.videoHeight, properties[0].videoHeight);
+        assert.equal(ret.time, properties[0].playStartTime + (properties[0].currentPlayTime * 1000));
     });
+
+    it("continue", async () => {
+
+        const ret = [{
+            video: -1,
+            audio: -1,
+            videoWidth: 640,
+            videoHeight: 480,
+            time: properties[0].playStartTime + (properties[0].currentPlayTime * 1000)
+        }];
+
+        ret.push(...SaltTransform.generateRepresentationHistoryFromProperty(properties[1], ret[0]));
+
+        ret.forEach((e, i) => {
+            assert.equal(e.video, -1);
+            assert.equal(e.audio, -1);
+            assert.equal(e.videoWidth, properties[i].videoWidth);
+            assert.equal(e.videoHeight, properties[i].videoHeight);
+            assert.equal(e.time,  properties[i].playStartTime + (properties[i].currentPlayTime * 1000));
+        });
+    });
+
 });
 
 
@@ -537,10 +582,6 @@ describe("SaltTransform generateCmHistory test", () => {
         type: "main",
         time: 1575450590491.0
     }];
-
-    beforeEach(async () => {
-
-    });
 
     it("success1", async () => {
 
@@ -608,9 +649,6 @@ describe("SaltTransform generateCmHistory test", () => {
         assert.equal(true, Object.keys(ctx).length === 0 && ctx.constructor === Object);
     });
 
-    afterEach(async () => {
-
-    });
 });
 
 describe("SaltTransform.prototype.create test", () => {

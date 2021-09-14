@@ -84,10 +84,6 @@ describe("transform cache test", () => {
             }
         });
 
-
-        afterEach(async () => {
-
-        })
     });
 });
 

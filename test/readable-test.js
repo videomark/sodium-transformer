@@ -87,9 +87,6 @@ describe("readable test", () => {
             assert.equal(values.length, 0);
         });
 
-        afterEach(() => {
-
-        })
     });
 
     describe("http", () => {
