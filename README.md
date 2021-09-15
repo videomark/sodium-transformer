@@ -144,7 +144,7 @@ node app.js -g --opendata --sessionMaskSeed 1234567890123456 --withoutMongo --ou
 | salt  |            |                 |                       |               |                |                                             |                                                                                                                                                                                                                                                                     |
 | \| -- | \_id       |                 |                       |               | string         | -                                           | MongoDB の ID                                                                                                                                                                                                                                                       |
 | \| -- | id         |                 |                       |               | string         | video.property.uuid                         | ビデオ ID                                                                                                                                                                                                                                                           |
-| \| -- | connection |                 |                       |               |                |                                             |                                                                                                                                                                                                                                                                     |
+| \| -- | connection |                 |                       |               |                |                                             | Network Information API より取得した情報                                                                                                                                                                                                                            |
 | \|    | \| --      | type            |                       |               | string         | netinfo.type                                | デバイスがネットワーク通信に使用している接続の種類(bluetooth、cellular、ethernet、none、wifi、wimax、other、unknown) 取得出来ない場合は、null \*Network Information API より取得した情報                                                                            |
 | \|    | \| --      | effectiveType   |                       |               | string         | netinfo.effectiveType                       | 有効なタイプ(slow-2g、2g、3g、4g) のいずれかのタイプを返します。 この値は、直近の RTT、downlink の値を使用して決定されます 取得出来ない場合は、null \*Network Information API より取得した情報                                                                      |
 | \|    | \| --      | downlink        |                       |               | number         | netinfo.downlink                            | 下り速度(Mbps) \_ 25kbps で丸めた値 取得出来ない場合は、null \_Network Information API より取得した情報                                                                                                                                                             |
@@ -217,9 +217,7 @@ node app.js -g --opendata --sessionMaskSeed 1234567890123456 --withoutMongo --ou
 | \|    | \|         | \| --           | startTime             |               | number         | video.cmHistory.time                        | cm 開始時刻                                                                                                                                                                                                                                                         |  |
 | \|    | \|         | \| --           | endTime               |               | number         | video.cmHistory.time                        | cm 終了時刻                                                                                                                                                                                                                                                         |  |
 
-Network Information API より取得した情報 <http://wicg.github.io/netinfo/#networkinformation-interface>
-
-上記のページより抜粋
+connection は、[Network Information API](http://wicg.github.io/netinfo/#networkinformation-interface) より取得した情報
 
 Table of maximum downlink speeds
 
@@ -261,8 +259,6 @@ Table of maximum downlink speeds
 | unknown         | unknown                          | unknown               | +Infinity                   |
 | none            | none                             | none                  | 0                           |
 | other           | other                            | other                 | user agent specific.        |
-
-全体的に dateTime を使うか高精度タイムスタンプを使用するか検討中
 
 ## テスト
 
