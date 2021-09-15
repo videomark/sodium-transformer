@@ -139,83 +139,157 @@ node app.js -g --opendata --sessionMaskSeed 1234567890123456 --withoutMongo --ou
 
 ## 対応表
 
-|       |            |                 |                       |               | type           | sodium.js                                   | comment                                                                                                                                                                                                                                                             |
-| :---- | :--------- | :-------------- | :-------------------- | :------------ | -------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| salt  |            |                 |                       |               |                |                                             |                                                                                                                                                                                                                                                                     |
-| \| -- | \_id       |                 |                       |               | string         | -                                           | MongoDB の ID                                                                                                                                                                                                                                                       |
-| \| -- | id         |                 |                       |               | string         | video.property.uuid                         | ビデオ ID                                                                                                                                                                                                                                                           |
-| \| -- | connection |                 |                       |               |                |                                             | Network Information API より取得した情報                                                                                                                                                                                                                            |
-| \|    | \| --      | type            |                       |               | string         | netinfo.type                                | デバイスがネットワーク通信に使用している接続の種類(bluetooth、cellular、ethernet、none、wifi、wimax、other、unknown) 取得出来ない場合は、null \*Network Information API より取得した情報                                                                            |
-| \|    | \| --      | effectiveType   |                       |               | string         | netinfo.effectiveType                       | 有効なタイプ(slow-2g、2g、3g、4g) のいずれかのタイプを返します。 この値は、直近の RTT、downlink の値を使用して決定されます 取得出来ない場合は、null \*Network Information API より取得した情報                                                                      |
-| \|    | \| --      | downlink        |                       |               | number         | netinfo.downlink                            | 下り速度(Mbps) \_ 25kbps で丸めた値 取得出来ない場合は、null \_Network Information API より取得した情報                                                                                                                                                             |
-| \|    | \| --      | downlinkMax     |                       |               | number         | netinfo.downlinkMax                         | 最大下り速度(Mbps) 取得出来ない場合は、null \*Network Information API より取得した情報                                                                                                                                                                              |
-| \|    | \| --      | rtt             |                       |               | number         | netinfo.rtt                                 | RTT 25msec で丸めた値 取得出来ない場合は、null                                                                                                                                                                                                                      |
-| \|    | \| --      | apn             |                       |               | string         | netinfo.apn                                 | アクセスポイント 取得出来ない場合は、null                                                                                                                                                                                                                           |
-| \|    | \| --      | plmn            |                       |               | string         | netinfo.plmn                                | ルーティングエリア 取得出来ない場合は、null                                                                                                                                                                                                                         |
-| \|    | \| --      | sim             |                       |               | string         | netinfo.sim                                 | SIM 取得出来ない場合は、null                                                                                                                                                                                                                                        |
-| \| -- | network    |                 |                       |               |                |                                             |                                                                                                                                                                                                                                                                     |
-| \|    | \| --      | serverHost      |                       |               | string         | location                                    | 計測対象ページのホスト名                                                                                                                                                                                                                                            |
-| \|    | \| --      | serverIp        |                       |               | string         | locationIp                                  | 計測対象ページ IP アドレス                                                                                                                                                                                                                                          |
-| \|    | \| --      | clientIp        |                       |               | string         | REMOTE_ADDR                                 | クライアント IP アドレス                                                                                                                                                                                                                                            |
-| \|    | \| --      | clientLocation  |                       |               |                |                                             |                                                                                                                                                                                                                                                                     |
-| \|    | \| --      | \| --           | country               |               | string         | -                                           | クライアントの国 (MaxMind 推定)                                                                                                                                                                                                                                     |
-| \|    | \| --      | \| --           | subdivision           |               | string         | -                                           | クライアントの都道府県 (MaxMind 推定)                                                                                                                                                                                                                               |
-| \|    | \| --      | isp             |                       |               | string         | -                                           | クライアントの ISP (MaxMind 推定)                                                                                                                                                                                                                                   |
-| \|    | \| --      | asn             |                       |               | string         | -                                           | クライアントの Autonomous System Number (MaxMind 推定)                                                                                                                                                                                                              |
-| \| -- | session    |                 |                       |               |                |                                             |                                                                                                                                                                                                                                                                     |
-| \|    | \| --      | \*lastSend      |                       |               | null \| Date   | -                                           | 最終送信日時。デフォルトは null。このフィールドの値は外部の sodium コレクションの `last_send` フィールドから移行するため本スクリプトでは書き込まれません。                                                                                                          |
-| \|    | \| --      | location        |                       |               | string         | location                                    | 視聴ページの URL                                                                                                                                                                                                                                                    |
-| \|    | \| --      | \*qoe           |                       |               | null \| number | -                                           | QoE 値。デフォルトは null。このフィールドの値は外部の sodium コレクションの `qoe` フィールドから移行するため本スクリプトでは書き込まれません。                                                                                                                      |
-| \|    | \| --      | sodiumSessionId |                       |               | string         | session                                     | セッション ID                                                                                                                                                                                                                                                       |
-| \|    | \| --      | sodiumVideoId   |                       |               | string         | video.property.uuid                         | ビデオ ID                                                                                                                                                                                                                                                           |
-| \|    | \| --      | type            |                       |               | string         | -                                           | セッション種別 (social, personal)。デフォルトは social。sesison の値は UUIDv4 であれば social とする。                                                                                                                                                              |
-| \|    | \| --      | \*orientation   |                       |               | string         | 未実装                                      | デバイスの表示状態                                                                                                                                                                                                                                                  |
-| \|    | \| --      | userAgent       |                       |               |                |                                             |                                                                                                                                                                                                                                                                     |
-| \|    | \| --      | \| --           | browser               |               | string         | userAgent                                   | クライアントのブラウザ                                                                                                                                                                                                                                              |
-| \|    | \| --      | \| --           | original              |               | string         | userAgent                                   | UA 文字列全体                                                                                                                                                                                                                                                       |
-| \|    | \| --      | \| --           | os                    |               | string         | userAgent                                   | クライアントの OS                                                                                                                                                                                                                                                   |
-| \| -- | video      |                 |                       |               |                |                                             |
-| \|    | \| --      | videoId         |                       |               | string         | video.property.holderId,                    | サービス提供元が付加した ID                                                                                                                                                                                                                                         |
-| \|    | \| --      | duration        | duration              |               | number         | video.property.mediaSize                    | 再生中の動画の長さ(秒)                                                                                                                                                                                                                                              |
-| \|    | \| --      | representations |                       |               |                |                                             |                                                                                                                                                                                                                                                                     |
-| \|    | \|         | \| --           | \*id                  |               | number         | video.play_list_info.representationId       | プレイリストの ID                                                                                                                                                                                                                                                   |
-| \|    | \|         | \| --           | resolution            |               |                |                                             |                                                                                                                                                                                                                                                                     |
-| \|    | \|         | \|              | \| --                 | height        | number         | video.play_list_info.videoHeight            | 高さ                                                                                                                                                                                                                                                                |
-| \|    | \|         | \|              | \| --                 | width         | number         | video.play_list_info.videoWidth             | 幅                                                                                                                                                                                                                                                                  |
-| \|    | \|         | \| --           | container             |               | string         | video.play_list_info.container              | 動画のコンテナ                                                                                                                                                                                                                                                      |
-| \|    | \|         | \| --           | videoCodec            |               | string         | video.play_list_info.codec                  | 動画のコーデック                                                                                                                                                                                                                                                    |
-| \|    | \|         | \| --           | audioCodec            |               | string         | video.play_list_info.codec                  | 音声のコーデック                                                                                                                                                                                                                                                    |
-| \|    | \|         | \| --           | videoTargetBitrate    |               | number         | video.play_list_info.bps                    | 動画のビットレート                                                                                                                                                                                                                                                  |
-| \|    | \|         | \| --           | audioTargetBitrate    |               | number         | video.play_list_info.bps                    | 音声のビットレート                                                                                                                                                                                                                                                  |
-| \|    | \|         | \| --           | domainName            |               | string         | video.play_list_info.serverIp               | CDN サーバドメイン _video.play_list_info.serverIp を使用しているのは、TQAPI Server 対応時に IP アドレスを入れるフィールド(serverIp)として作成したが IP アドレスを取得することができず CDN のドメイン名を入れて実装した。そのため、この値を domainName とし使用する_ |
-| \|    | \| --      | playHistory     |                       |               |                |                                             |                                                                                                                                                                                                                                                                     |
-| \|    | \|         | \| --           | startTime             |               | number         | video.property.playStartTime                | 再生開始時刻                                                                                                                                                                                                                                                        |
-| \|    | \|         | \| --           | holiday               |               | boolean        | -                                           | 日本の休日フラグ (holiday_jp 推定)                                                                                                                                                                                                                                  |
-| \|    | \|         | \| --           | endTime               |               | number         | video.property.playEndTime                  | 再生終了時刻                                                                                                                                                                                                                                                        |
-| \|    | \|         | \| --           | throughputHistory     |               |                |                                             |
-| \|    | \|         | \|              | \| --　               | dlTime        | number         | video.throughput_info.start                 | ダウンロード開始時刻                                                                                                                                                                                                                                                |
-| \|    | \|         | \|              | \| --                 | throughput    | number         | video.throughput_info.bps                   | スループット(bps)                                                                                                                                                                                                                                                   |
-| \|    | \|         | \|              | \| --                 | rtt           | number         | video.throughput_info.start, end            | 応答時間(秒)                                                                                                                                                                                                                                                        |
-| \|    | \|         | \| --           | eventHistory          |               |                |                                             |                                                                                                                                                                                                                                                                     |
-| \|    | \|         | \|              | \| --                 | type          | string         | event.name                                  | イベント種別                                                                                                                                                                                                                                                        |
-| \|    | \|         | \|              | \| --                 | highRes       | number         | event.time                                  | イベット発生時刻 高精度タイムスタンプ                                                                                                                                                                                                                               |
-| \|    | \|         | \|              | \| --                 | date          | number         | event.dateTime                              | イベット発生時刻                                                                                                                                                                                                                                                    |
-| \|    | \|         | \|              | \| --                 | play          | number         | event.playTime                              | 再生開始からの経過時間                                                                                                                                                                                                                                              |
-| \|    | \|         | \|              | \| --                 | pos           | number         | event.playPos                               | 再生位置                                                                                                                                                                                                                                                            |
-| \|    | \|         | \| --           | representationHistory |               |                |                                             |
-| \|    | \|         | \|              | \| --                 | video         | string         | video.playback_quality.representation.video | Video Representation ID                                                                                                                                                                                                                                             |
-| \|    | \|         | \|              | \| --                 | audio         | string         | video.playback_quality.representation.audio | Audio Representation ID                                                                                                                                                                                                                                             |
-| \|    | \|         | \|              | \| --                 | videoHeight   | number         | -                                           | representations がある場合、該当の resolution の height の値、ない場合は、video.property.videoHeight の値                                                                                                                                                           |
-| \|    | \|         | \|              | \| --                 | videoWidth    | number         | -                                           | representations がある場合、該当の resolution の width の値、ない場合は、video.property.videoWidth の値                                                                                                                                                             |
-| \|    | \|         | \|              | \| --                 | time          | number         | video.playback_quality.creationDate         | resolution の値が変化した時刻                                                                                                                                                                                                                                       |
-| \|    | \|         | \| --           | frameDropHistory      |               |                |                                             |
-| \|    | \|         | \|              | \| --                 | time          | number         | video.playback_quality.creationTime         | ドロップ検出時刻 高精度タイムスタンプ                                                                                                                                                                                                                               |  |
-| \|    | \|         | \|              | \| --                 | droppedFrames | number         | video.playback_quality.droppedVideoFrames   | ドロップ数                                                                                                                                                                                                                                                          |  |
-| \|    | \|         | \|              | \| --                 | totalFrames   | number         | video.playback_quality.totalVideoFrames     | 描画フレーム数                                                                                                                                                                                                                                                      |  |
-| \|    | \| --      | cmHistory       |                       |               |                |                                             |
-| \|    | \|         | \| --           | duration              |               | number         | -                                           | cm の再生時間                                                                                                                                                                                                                                                       |  |
-| \|    | \|         | \| --           | startTime             |               | number         | video.cmHistory.time                        | cm 開始時刻                                                                                                                                                                                                                                                         |  |
-| \|    | \|         | \| --           | endTime               |               | number         | video.cmHistory.time                        | cm 終了時刻                                                                                                                                                                                                                                                         |  |
+### salt
+
+| property   | type   | sodium.js           | comment       |
+| :--------- | ------ | ------------------- | ------------- |
+| \_id       | string | -                   | MongoDB の ID |
+| id         | string | video.property.uuid | ビデオ ID     |
+| connection | object |                     |               |
+| network    | object |                     |               |
+| session    | object |                     |               |
+| video      | object |                     |               |
+
+#### connection
+
+| property      | type   | sodium.js             | comment                                                                                                                                                                                        |
+| :------------ | ------ | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type          | string | netinfo.type          | デバイスがネットワーク通信に使用している接続の種類(bluetooth、cellular、ethernet、none、wifi、wimax、other、unknown) 取得出来ない場合は、null \*Network Information API より取得した情報       |
+| effectiveType | string | netinfo.effectiveType | 有効なタイプ(slow-2g、2g、3g、4g) のいずれかのタイプを返します。 この値は、直近の RTT、downlink の値を使用して決定されます 取得出来ない場合は、null \*Network Information API より取得した情報 |
+| downlink      | number | netinfo.downlink      | 下り速度(Mbps) \_ 25kbps で丸めた値 取得出来ない場合は、null \_Network Information API より取得した情報                                                                                        |
+| downlinkMax   | number | netinfo.downlinkMax   | 最大下り速度(Mbps) 取得出来ない場合は、null \*Network Information API より取得した情報                                                                                                         |
+| rtt           | number | netinfo.rtt           | RTT 25msec で丸めた値 取得出来ない場合は、null                                                                                                                                                 |
+| apn           | string | netinfo.apn           | アクセスポイント 取得出来ない場合は、null                                                                                                                                                      |
+| plmn          | string | netinfo.plmn          | ルーティングエリア 取得出来ない場合は、null                                                                                                                                                    |
+| sim           | string | netinfo.sim           | SIM 取得出来ない場合は、null                                                                                                                                                                   |
+
+#### network
+
+| property       | type   | sodium.js   | comment                                                |
+| :------------- | ------ | ----------- | ------------------------------------------------------ |
+| serverHost     | string | location    | 計測対象ページのホスト名                               |
+| serverIp       | string | locationIp  | 計測対象ページ IP アドレス                             |
+| clientIp       | string | REMOTE_ADDR | クライアント IP アドレス                               |
+| clientLocation | object |             |                                                        |
+| isp            | string | -           | クライアントの ISP (MaxMind 推定)                      |
+| asn            | string | -           | クライアントの Autonomous System Number (MaxMind 推定) |
+
+##### clientLocation
+
+| property    | type   | sodium.js | comment                               |
+| :---------- | ------ | --------- | ------------------------------------- |
+| country     | string | -         | クライアントの国 (MaxMind 推定)       |
+| subdivision | string | -         | クライアントの都道府県 (MaxMind 推定) |
+
+#### session
+
+| property        | type           | sodium.js           | comment                                                                                                                                                    |
+| :-------------- | -------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \*lastSend      | null \| Date   | -                   | 最終送信日時。デフォルトは null。このフィールドの値は外部の sodium コレクションの `last_send` フィールドから移行するため本スクリプトでは書き込まれません。 |
+| location        | string         | location            | 視聴ページの URL                                                                                                                                           |
+| \*qoe           | null \| number | -                   | QoE 値。デフォルトは null。このフィールドの値は外部の sodium コレクションの `qoe` フィールドから移行するため本スクリプトでは書き込まれません。             |
+| sodiumSessionId | string         | session             | セッション ID                                                                                                                                              |
+| sodiumVideoId   | string         | video.property.uuid | ビデオ ID                                                                                                                                                  |
+| type            | string         | -                   | セッション種別 (social, personal)。デフォルトは social。sesison の値は UUIDv4 であれば social とする。                                                     |
+| \*orientation   | string         | 未実装              | デバイスの表示状態                                                                                                                                         |
+| userAgent       |                |                     |                                                                                                                                                            |
+
+##### userAgent
+
+| property | type   | sodium.js | comment                |
+| :------- | ------ | --------- | ---------------------- |
+| browser  | string | userAgent | クライアントのブラウザ |
+| original | string | userAgent | UA 文字列全体          |
+| os       | string | userAgent | クライアントの OS      |
+
+#### video
+
+| property        | type     | sodium.js                | comment                     |
+| :-------------- | -------- | ------------------------ | --------------------------- |
+|                 |          |                          |
+| videoId         | string   | video.property.holderId, | サービス提供元が付加した ID |
+| duration        | number   | video.property.mediaSize | 再生中の動画の長さ(秒)      |
+| representations | object[] |                          |                             |
+| playHistory     | object   |                          |                             |
+| cmHistory       | object[] |                          |
+
+##### representations
+
+| property           | type   | sodium.js                             | comment                                                                                                                                                                                                                                                             |
+| :----------------- | ------ | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \*id               | number | video.play_list_info.representationId | プレイリストの ID                                                                                                                                                                                                                                                   |
+| resolution         | object |                                       |                                                                                                                                                                                                                                                                     |
+| container          | string | video.play_list_info.container        | 動画のコンテナ                                                                                                                                                                                                                                                      |
+| videoCodec         | string | video.play_list_info.codec            | 動画のコーデック                                                                                                                                                                                                                                                    |
+| audioCodec         | string | video.play_list_info.codec            | 音声のコーデック                                                                                                                                                                                                                                                    |
+| videoTargetBitrate | number | video.play_list_info.bps              | 動画のビットレート                                                                                                                                                                                                                                                  |
+| audioTargetBitrate | number | video.play_list_info.bps              | 音声のビットレート                                                                                                                                                                                                                                                  |
+| domainName         | string | video.play_list_info.serverIp         | CDN サーバドメイン _video.play_list_info.serverIp を使用しているのは、TQAPI Server 対応時に IP アドレスを入れるフィールド(serverIp)として作成したが IP アドレスを取得することができず CDN のドメイン名を入れて実装した。そのため、この値を domainName とし使用する_ |
+
+###### resolution
+
+| property | type   | sodium.js                        | comment |
+| :------- | ------ | -------------------------------- | ------- |
+| height   | number | video.play_list_info.videoHeight | 高さ    |
+| width    | number | video.play_list_info.videoWidth  | 幅      |
+
+##### playHistory
+
+| property              | type     | sodium.js                    | comment                            |
+| :-------------------- | -------- | ---------------------------- | ---------------------------------- |
+| startTime             | number   | video.property.playStartTime | 再生開始時刻                       |
+| holiday               | boolean  | -                            | 日本の休日フラグ (holiday_jp 推定) |
+| endTime               | number   | video.property.playEndTime   | 再生終了時刻                       |
+| throughputHistory     | object[] |                              |
+| eventHistory          | object[] |                              |                                    |
+| representationHistory | object[] |                              |
+| frameDropHistory      | object[] |                              |
+
+###### throughputHistory
+
+| property   | type   | sodium.js                        | comment              |
+| :--------- | ------ | -------------------------------- | -------------------- |
+| dlTime     | number | video.throughput_info.start      | ダウンロード開始時刻 |
+| throughput | number | video.throughput_info.bps        | スループット(bps)    |
+| rtt        | number | video.throughput_info.start, end | 応答時間(秒)         |
+
+###### eventHistory
+
+| property | type   | sodium.js      | comment                               |
+| :------- | ------ | -------------- | ------------------------------------- |
+| type     | string | event.name     | イベント種別                          |
+| highRes  | number | event.time     | イベット発生時刻 高精度タイムスタンプ |
+| date     | number | event.dateTime | イベット発生時刻                      |
+| play     | number | event.playTime | 再生開始からの経過時間                |
+| pos      | number | event.playPos  | 再生位置                              |
+
+###### representationHistory
+
+| property    | type   | sodium.js                                   | comment                                                                                                   |
+| :---------- | ------ | ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| video       | string | video.playback_quality.representation.video | Video Representation ID                                                                                   |
+| audio       | string | video.playback_quality.representation.audio | Audio Representation ID                                                                                   |
+| videoHeight | number | -                                           | representations がある場合、該当の resolution の height の値、ない場合は、video.property.videoHeight の値 |
+| videoWidth  | number | -                                           | representations がある場合、該当の resolution の width の値、ない場合は、video.property.videoWidth の値   |
+| time        | number | video.playback_quality.creationDate         | resolution の値が変化した時刻                                                                             |
+
+###### frameDropHistory
+
+| property      | type   | sodium.js                                 | comment                               |
+| :------------ | ------ | ----------------------------------------- | ------------------------------------- |
+| time          | number | video.playback_quality.creationTime       | ドロップ検出時刻 高精度タイムスタンプ |  |
+| droppedFrames | number | video.playback_quality.droppedVideoFrames | ドロップ数                            |
+| totalFrames   | number | video.playback_quality.totalVideoFrames   | 描画フレーム数                        |
+
+##### cmHistory
+
+| property  | type   | sodium.js            | comment       |
+| :-------- | ------ | -------------------- | ------------- |
+| duration  | number | -                    | cm の再生時間 |
+| startTime | number | video.cmHistory.time | cm 開始時刻   |
+| endTime   | number | video.cmHistory.time | cm 終了時刻   |
+
+## Network Information API
 
 connection は、[Network Information API](http://wicg.github.io/netinfo/#networkinformation-interface) より取得した情報
 
