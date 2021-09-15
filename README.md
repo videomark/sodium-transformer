@@ -139,6 +139,16 @@ node app.js -g --opendata --sessionMaskSeed 1234567890123456 --withoutMongo --ou
 
 ## 対応表
 
+sodium.js の送信するデータと salt の対応表は以下になります。
+
+実際に変換を行った例は以下にあります。
+
+| ファイル                           | 用途                               |
+| ---------------------------------- | ---------------------------------- |
+| test-data/sodium-sample4.log       | sodium.js が送信したデータ         |
+| test-data/sodium-sample4.json      | 上記の JSON 部分を抽出したもデータ |
+| test-data/sodium-sample4-salt.json | 変換後のデータ                     |
+
 ### salt
 
 | property   | type   | sodium.js           | comment       |
