@@ -671,3 +671,38 @@ describe("SaltTransform.prototype.create test 3", () => {
     const output = saltTransform.create(inputJson);
     it("output.network.asn", () => expect("2527").to.equal(output.network.asn));
 });
+
+describe("SaltTransform.prototype.create asn", () => {
+    const saltTransform = new SaltTransform();
+    const inputJson = require("../test-data/sodium-sample4.json");
+    const outputJson = require("../test-data/sodium-sample4-salt.json");
+    const salt = saltTransform.create(inputJson);
+    it("salt.network.asn", () =>
+      expect(salt.network.asn).to.equal(outputJson.network.asn));
+});
+  
+describe("SaltTransform.prototype.create location", () => {
+    const saltTransform = new SaltTransform();
+    const inputJson = require("../test-data/sodium-sample4.json");
+    const outputJson = require("../test-data/sodium-sample4-salt.json");
+    const salt = saltTransform.create(inputJson);
+    it("salt.network.location", () =>
+        expect(salt.session.location).to.equal(outputJson.session.location));
+});
+
+describe("SaltTransform.prototype.create resolution", () => {
+    const saltTransform = new SaltTransform();
+    const inputJson = require("../test-data/sodium-sample4.json");
+    const outputJson = require("../test-data/sodium-sample4-salt.json");
+    const salt = saltTransform.create(inputJson);
+    const [
+        { videoWidth, videoHeight },
+    ] = salt.video.playHistory.representationHistory;
+    const [
+        { videoWidth: resultVideoWidth, videoHeight: resultVideoHeight },
+    ] = outputJson.video.playHistory.representationHistory;
+    it("salt.video.playHistory.representationHistory", () =>
+        expect(videoWidth).to.equal(resultVideoWidth));
+    it("salt.video.playHistory.representationHistory", () =>
+        expect(videoHeight).to.equal(resultVideoHeight));
+});

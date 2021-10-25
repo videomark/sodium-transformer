@@ -1,0 +1,315 @@
+{
+  "id": "932a9bd1-9c03-408b-9749-54ea85e8313b",
+  "connection": {
+    "type": null,
+    "effectiveType": "4g",
+    "downlink": 10,
+    "downlinkMax": null,
+    "rtt": 0,
+    "apn": null,
+    "plmn": null,
+    "sim": null
+  },
+  "network": {
+    "serverHost": "www.youtube.com",
+    "serverIp": "2404:6800:4004:822::200e",
+    "clientIp": "172.18.0.0",
+    "clientLocation": { "country": "--", "subdivision": "0" },
+    "isp": "unknown",
+    "asn": "0"
+  },
+  "session": {
+    "location": "https://www.youtube.com/watch?v=sCWJ3a4Kf0s",
+    "sodiumSessionId": "5da97e6e-fcf0-4043-9671-2163d7c3d71a",
+    "sodiumVideoId": "932a9bd1-9c03-408b-9749-54ea85e8313b",
+    "type": "social",
+    "userAgent": {
+      "browser": "Chrome93.0.4577.63",
+      "original": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36",
+      "os": "Windows10"
+    }
+  },
+  "video": {
+    "videoId": "sCWJ3a4Kf0s",
+    "duration": 665.181,
+    "representations": [
+      {
+        "id": "299",
+        "resolution": { "height": 1080, "width": 1920 },
+        "container": "mp4",
+        "videoCodec": "avc1.64002a",
+        "audioCodec": "",
+        "videoTargetBitrate": 5955899,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "303",
+        "resolution": { "height": 1080, "width": 1920 },
+        "container": "webm",
+        "videoCodec": "vp9",
+        "audioCodec": "",
+        "videoTargetBitrate": 4434302,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "399",
+        "resolution": { "height": 1080, "width": 1920 },
+        "container": "mp4",
+        "videoCodec": "av01.0.09M.08",
+        "audioCodec": "",
+        "videoTargetBitrate": 2517042,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "136",
+        "resolution": { "height": 720, "width": 1280 },
+        "container": "mp4",
+        "videoCodec": "avc1.4d401f",
+        "audioCodec": "",
+        "videoTargetBitrate": 2728558,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "247",
+        "resolution": { "height": 720, "width": 1280 },
+        "container": "webm",
+        "videoCodec": "vp9",
+        "audioCodec": "",
+        "videoTargetBitrate": 1529646,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "298",
+        "resolution": { "height": 720, "width": 1280 },
+        "container": "mp4",
+        "videoCodec": "avc1.4d4020",
+        "audioCodec": "",
+        "videoTargetBitrate": 1572300,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "302",
+        "resolution": { "height": 720, "width": 1280 },
+        "container": "webm",
+        "videoCodec": "vp9",
+        "audioCodec": "",
+        "videoTargetBitrate": 2671760,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "398",
+        "resolution": { "height": 720, "width": 1280 },
+        "container": "mp4",
+        "videoCodec": "av01.0.08M.08",
+        "audioCodec": "",
+        "videoTargetBitrate": 1318913,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "135",
+        "resolution": { "height": 480, "width": 854 },
+        "container": "mp4",
+        "videoCodec": "avc1.4d401f",
+        "audioCodec": "",
+        "videoTargetBitrate": 896131,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "244",
+        "resolution": { "height": 480, "width": 854 },
+        "container": "webm",
+        "videoCodec": "vp9",
+        "audioCodec": "",
+        "videoTargetBitrate": 750894,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "397",
+        "resolution": { "height": 480, "width": 854 },
+        "container": "mp4",
+        "videoCodec": "av01.0.04M.08",
+        "audioCodec": "",
+        "videoTargetBitrate": 644087,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "134",
+        "resolution": { "height": 360, "width": 640 },
+        "container": "mp4",
+        "videoCodec": "avc1.4d401e",
+        "audioCodec": "",
+        "videoTargetBitrate": 559767,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "243",
+        "resolution": { "height": 360, "width": 640 },
+        "container": "webm",
+        "videoCodec": "vp9",
+        "audioCodec": "",
+        "videoTargetBitrate": 410575,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "396",
+        "resolution": { "height": 360, "width": 640 },
+        "container": "mp4",
+        "videoCodec": "av01.0.01M.08",
+        "audioCodec": "",
+        "videoTargetBitrate": 349017,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "133",
+        "resolution": { "height": 240, "width": 426 },
+        "container": "mp4",
+        "videoCodec": "avc1.4d4015",
+        "audioCodec": "",
+        "videoTargetBitrate": 293600,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "242",
+        "resolution": { "height": 240, "width": 426 },
+        "container": "webm",
+        "videoCodec": "vp9",
+        "audioCodec": "",
+        "videoTargetBitrate": 224456,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "395",
+        "resolution": { "height": 240, "width": 426 },
+        "container": "mp4",
+        "videoCodec": "av01.0.00M.08",
+        "audioCodec": "",
+        "videoTargetBitrate": 174043,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "160",
+        "resolution": { "height": 144, "width": 256 },
+        "container": "mp4",
+        "videoCodec": "avc1.4d400c",
+        "audioCodec": "",
+        "videoTargetBitrate": 111500,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "278",
+        "resolution": { "height": 144, "width": 256 },
+        "container": "webm",
+        "videoCodec": "vp9",
+        "audioCodec": "",
+        "videoTargetBitrate": 101420,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "394",
+        "resolution": { "height": 144, "width": 256 },
+        "container": "mp4",
+        "videoCodec": "av01.0.00M.08",
+        "audioCodec": "",
+        "videoTargetBitrate": 82194,
+        "audioTargetBitrate": -1,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "140",
+        "resolution": { "height": -1, "width": -1 },
+        "container": "mp4",
+        "videoCodec": "",
+        "audioCodec": "mp4a.40.2",
+        "videoTargetBitrate": -1,
+        "audioTargetBitrate": 131112,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "249",
+        "resolution": { "height": -1, "width": -1 },
+        "container": "webm",
+        "videoCodec": "",
+        "audioCodec": "opus",
+        "videoTargetBitrate": -1,
+        "audioTargetBitrate": 55227,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "250",
+        "resolution": { "height": -1, "width": -1 },
+        "container": "webm",
+        "videoCodec": "",
+        "audioCodec": "opus",
+        "videoTargetBitrate": -1,
+        "audioTargetBitrate": 73328,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      },
+      {
+        "id": "251",
+        "resolution": { "height": -1, "width": -1 },
+        "container": "webm",
+        "videoCodec": "",
+        "audioCodec": "opus",
+        "videoTargetBitrate": -1,
+        "audioTargetBitrate": 149740,
+        "domainName": "r1---sn-oguelner.googlevideo.com"
+      }
+    ],
+    "playHistory": {
+      "startTime": 1630556744452,
+      "holiday": false,
+      "endTime": -1,
+      "throughputHistory": [],
+      "eventHistory": [
+        {
+          "type": "progress",
+          "time": {
+            "highRes": 6176366.9,
+            "date": 1630556744857,
+            "play": 0.405,
+            "pos": 0.233384
+          }
+        },
+        {
+          "type": "progress",
+          "time": {
+            "highRes": 6180197.9,
+            "date": 1630556748688,
+            "play": 4.236,
+            "pos": 4.064276
+          }
+        }
+      ],
+      "representationHistory": [
+        {
+          "video": "243",
+          "audio": "251",
+          "videoWidth": 640,
+          "videoHeight": 360,
+          "time": 1630556745468
+        }
+      ],
+      "frameDropHistory": []
+    },
+    "cmHistory": []
+  }
+}

@@ -1,0 +1,459 @@
+{
+  "version": "1.7.0",
+  "date": "2021-09-02T04:25:49.821Z",
+  "startTime": 6176300.1,
+  "endTime": 6181330.5,
+  "session": "5da97e6e-fcf0-4043-9671-2163d7c3d71a",
+  "sessionType": "social",
+  "location": "https://www.youtube.com/watch?v=sCWJ3a4Kf0s",
+  "locationIp": "2404:6800:4004:822::200e",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36",
+  "sequence": 17,
+  "calc": true,
+  "service": "youtube",
+  "video": [
+    {
+      "property": {
+        "uuid": "932a9bd1-9c03-408b-9749-54ea85e8313b",
+        "viewCount": 2220896,
+        "domainName": "r1---sn-oguelner.googlevideo.com",
+        "holderId": "sCWJ3a4Kf0s",
+        "width": 0,
+        "height": 0,
+        "videoWidth": 640,
+        "videoHeight": 360,
+        "mediaSize": 665.181,
+        "defaultPlaybackRate": 1,
+        "playbackRate": 1,
+        "playStartTime": 1630556744452,
+        "playEndTime": -1,
+        "currentPlayPos": 5.174368,
+        "currentPlayTime": 5.346,
+        "bitrateControlData": {
+          "bitrate": -1,
+          "resolution": -1
+        }
+      },
+      "playback_quality": [
+        {
+          "totalVideoFrames": 30,
+          "droppedVideoFrames": 0,
+          "creationTime": 6176976.9,
+          "creationDate": 1630556745468,
+          "deltaTotalVideoFrames": 30,
+          "deltaDroppedVideoFrames": 0,
+          "deltaTime": 973.7000000001863,
+          "representation": {
+            "video": "243",
+            "audio": "251"
+          },
+          "bitrate": 560315,
+          "videoBitrate": 410575,
+          "receiveBuffer": 20.233,
+          "framerate": 30,
+          "throughput": [],
+          "speed": 1
+        },
+        {
+          "totalVideoFrames": 60,
+          "droppedVideoFrames": 0,
+          "creationTime": 6177976.4,
+          "creationDate": 1630556746468,
+          "deltaTotalVideoFrames": 30,
+          "deltaDroppedVideoFrames": 0,
+          "deltaTime": 999.5,
+          "representation": {
+            "video": "243",
+            "audio": "251"
+          },
+          "bitrate": 560315,
+          "videoBitrate": 410575,
+          "receiveBuffer": 20.233,
+          "framerate": 30,
+          "throughput": [],
+          "speed": 1
+        },
+        {
+          "totalVideoFrames": 90,
+          "droppedVideoFrames": 0,
+          "creationTime": 6178976.2,
+          "creationDate": 1630556747468,
+          "deltaTotalVideoFrames": 30,
+          "deltaDroppedVideoFrames": 0,
+          "deltaTime": 999.7999999998137,
+          "representation": {
+            "video": "243",
+            "audio": "251"
+          },
+          "bitrate": 560315,
+          "videoBitrate": 410575,
+          "receiveBuffer": 20.233,
+          "framerate": 30,
+          "throughput": [],
+          "speed": 1
+        },
+        {
+          "totalVideoFrames": 120,
+          "droppedVideoFrames": 0,
+          "creationTime": 6179976.1,
+          "creationDate": 1630556748467,
+          "deltaTotalVideoFrames": 30,
+          "deltaDroppedVideoFrames": 0,
+          "deltaTime": 999.8999999994412,
+          "representation": {
+            "video": "243",
+            "audio": "251"
+          },
+          "bitrate": 560315,
+          "videoBitrate": 410575,
+          "receiveBuffer": 30.000999999999998,
+          "framerate": 30,
+          "throughput": [],
+          "speed": 1
+        },
+        {
+          "totalVideoFrames": 150,
+          "droppedVideoFrames": 0,
+          "creationTime": 6180976.9,
+          "creationDate": 1630556749468,
+          "deltaTotalVideoFrames": 30,
+          "deltaDroppedVideoFrames": 0,
+          "deltaTime": 1000.8000000007451,
+          "representation": {
+            "video": "243",
+            "audio": "251"
+          },
+          "bitrate": 560315,
+          "videoBitrate": 410575,
+          "receiveBuffer": 30.000999999999998,
+          "framerate": 30,
+          "throughput": [],
+          "speed": 1
+        }
+      ],
+      "play_list_info": [
+        {
+          "representationId": "299",
+          "bps": 5955899,
+          "videoWidth": 1920,
+          "videoHeight": 1080,
+          "container": "mp4",
+          "codec": "avc1.64002a",
+          "fps": 60,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "303",
+          "bps": 4434302,
+          "videoWidth": 1920,
+          "videoHeight": 1080,
+          "container": "webm",
+          "codec": "vp9",
+          "fps": 60,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "399",
+          "bps": 2517042,
+          "videoWidth": 1920,
+          "videoHeight": 1080,
+          "container": "mp4",
+          "codec": "av01.0.09M.08",
+          "fps": 60,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "136",
+          "bps": 2728558,
+          "videoWidth": 1280,
+          "videoHeight": 720,
+          "container": "mp4",
+          "codec": "avc1.4d401f",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "247",
+          "bps": 1529646,
+          "videoWidth": 1280,
+          "videoHeight": 720,
+          "container": "webm",
+          "codec": "vp9",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "298",
+          "bps": 1572300,
+          "videoWidth": 1280,
+          "videoHeight": 720,
+          "container": "mp4",
+          "codec": "avc1.4d4020",
+          "fps": 60,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "302",
+          "bps": 2671760,
+          "videoWidth": 1280,
+          "videoHeight": 720,
+          "container": "webm",
+          "codec": "vp9",
+          "fps": 60,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "398",
+          "bps": 1318913,
+          "videoWidth": 1280,
+          "videoHeight": 720,
+          "container": "mp4",
+          "codec": "av01.0.08M.08",
+          "fps": 60,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "135",
+          "bps": 896131,
+          "videoWidth": 854,
+          "videoHeight": 480,
+          "container": "mp4",
+          "codec": "avc1.4d401f",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "244",
+          "bps": 750894,
+          "videoWidth": 854,
+          "videoHeight": 480,
+          "container": "webm",
+          "codec": "vp9",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "397",
+          "bps": 644087,
+          "videoWidth": 854,
+          "videoHeight": 480,
+          "container": "mp4",
+          "codec": "av01.0.04M.08",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "134",
+          "bps": 559767,
+          "videoWidth": 640,
+          "videoHeight": 360,
+          "container": "mp4",
+          "codec": "avc1.4d401e",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "243",
+          "bps": 410575,
+          "videoWidth": 640,
+          "videoHeight": 360,
+          "container": "webm",
+          "codec": "vp9",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "396",
+          "bps": 349017,
+          "videoWidth": 640,
+          "videoHeight": 360,
+          "container": "mp4",
+          "codec": "av01.0.01M.08",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "133",
+          "bps": 293600,
+          "videoWidth": 426,
+          "videoHeight": 240,
+          "container": "mp4",
+          "codec": "avc1.4d4015",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "242",
+          "bps": 224456,
+          "videoWidth": 426,
+          "videoHeight": 240,
+          "container": "webm",
+          "codec": "vp9",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "395",
+          "bps": 174043,
+          "videoWidth": 426,
+          "videoHeight": 240,
+          "container": "mp4",
+          "codec": "av01.0.00M.08",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "160",
+          "bps": 111500,
+          "videoWidth": 256,
+          "videoHeight": 144,
+          "container": "mp4",
+          "codec": "avc1.4d400c",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "278",
+          "bps": 101420,
+          "videoWidth": 256,
+          "videoHeight": 144,
+          "container": "webm",
+          "codec": "vp9",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "394",
+          "bps": 82194,
+          "videoWidth": 256,
+          "videoHeight": 144,
+          "container": "mp4",
+          "codec": "av01.0.00M.08",
+          "fps": 30,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "140",
+          "bps": 131112,
+          "videoWidth": -1,
+          "videoHeight": -1,
+          "container": "mp4",
+          "codec": "mp4a.40.2",
+          "fps": -1,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "249",
+          "bps": 55227,
+          "videoWidth": -1,
+          "videoHeight": -1,
+          "container": "webm",
+          "codec": "opus",
+          "fps": -1,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "250",
+          "bps": 73328,
+          "videoWidth": -1,
+          "videoHeight": -1,
+          "container": "webm",
+          "codec": "opus",
+          "fps": -1,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        },
+        {
+          "representationId": "251",
+          "bps": 149740,
+          "videoWidth": -1,
+          "videoHeight": -1,
+          "container": "webm",
+          "codec": "opus",
+          "fps": -1,
+          "chunkDuration": 5000,
+          "serverIp": "r1---sn-oguelner.googlevideo.com"
+        }
+      ],
+      "throughput_info": [],
+      "cmHistory": [],
+      "event_play": [],
+      "event_play_delta": [],
+      "event_pause": [],
+      "event_pause_delta": [],
+      "event_seeking": [],
+      "event_seeking_delta": [],
+      "event_seeked": [],
+      "event_seeked_delta": [],
+      "event_ended": [],
+      "event_ended_delta": [],
+      "event_stalled": [],
+      "event_stalled_delta": [],
+      "event_progress": [
+        {
+          "time": 6176366.9,
+          "dateTime": 1630556744857,
+          "playPos": 0.233384,
+          "playTime": 0.405
+        },
+        {
+          "time": 6180197.9,
+          "dateTime": 1630556748688,
+          "playPos": 4.064276,
+          "playTime": 4.236
+        }
+      ],
+      "event_progress_delta": [
+        {
+          "delta": 6176366.9,
+          "dateTime": 1630556744857,
+          "playPos": 0.233384,
+          "playTime": 0.405
+        },
+        {
+          "delta": 3831,
+          "dateTime": 1630556748688,
+          "playPos": 4.064276,
+          "playTime": 4.236
+        }
+      ],
+      "event_waiting": [],
+      "event_waiting_delta": [],
+      "event_canplay": [],
+      "event_canplay_delta": []
+    }
+  ],
+  "resource_timing": [],
+  "netinfo": {
+    "downlink": 10,
+    "effectiveType": "4g",
+    "rtt": 0
+  },
+  "REMOTE_ADDR": "172.18.0.0",
+  "isp": "unknown",
+  "asn": "0",
+  "country": "--",
+  "subdivision": "0"
+}
