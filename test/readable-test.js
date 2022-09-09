@@ -3,7 +3,7 @@ const { Writable, Transform } = require("stream");
 const { TextDecoder } = require("util");
 
 const { beforeEach, describe, it, afterEach } = require("mocha");
-const fetch = require("node-fetch");
+const { fetch } = require("undici");
 const config = require("config");
 
 const utf8Decoder = new TextDecoder();
@@ -182,7 +182,7 @@ describe("readable test", () => {
 
             const tasks = [new Promise(testFunc),
 
-            fetch(`http://${host}:${port}`, { // request error 
+            fetch(`http://${host}:${port}`, { // request error
                 method: "post",
                 body: "unformat",
                 headers: { "Content-Type": "application/json" },
