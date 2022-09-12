@@ -115,6 +115,8 @@ program
 
 // parse options
 program.parse(process.argv);
+// NOTE: commander v7 以降コマンドのプロパティとして保存されないのでその対処
+Object.assign(program, program.opts()); // TODO: Object.assign() を使用せず適切に分離してより安全に使用してほしい
 
 if (!program.verbose) {
 
@@ -138,9 +140,9 @@ try {
     program.optionMissingArgument({ flags: "     --sessionMaskSeed <STRING> 16バイトのhex文字列" });
 }
 
-/* 
-// pipe line 
-//                   
+/*
+// pipe line
+//
 // readable -> filter -> filteredThrough -> cooperate -> logThrough -> file(xxxx_co.log)
 //                              |                            |
 //                              |                            +-> socienty -> file(xxx_soc.log)
