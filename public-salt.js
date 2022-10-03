@@ -81,7 +81,7 @@ class Socienty extends Transform {
                                 return string.replace(p1, program.mask);
                             });
                         }
-                        if (salt.network.serverHost) 
+                        if (salt.network.serverHost)
                             salt.network.serverHost = hostMask(salt.network.serverHost)
                         if (salt.network.serverIp)
                             delete salt.network.serverIp;
@@ -101,7 +101,7 @@ class Socienty extends Transform {
 }
 
 program
-    .option("-v, --verbose", "verbosity that can be increased", (_dummyValue, previous) => 
+    .option("-v, --verbose", "verbosity that can be increased", (_dummyValue, previous) =>
         previous + 1 >= LOG_LEVEL.length ? previous : previous + 1
     , DEFAULT_LOG_LEVEL)
     .option("    --sessionMask [REGEXP]", `ボットセッションの正規表現`, config.get("mask.session"))
@@ -112,6 +112,8 @@ program
     .version(version);
 
 program.parse(process.argv);
+// NOTE: commander v7 以降コマンドのプロパティとして保存されないのでその対処
+Object.assign(program, program.opts()); // TODO: Object.assign() を使用せず適切に分離してより安全に使用してほしい
 
 const logger = log4js.getLogger("app");
 logger.level = program.verbose ? LOG_LEVEL[program.verbose]: LOG_LEVEL[DEFAULT_LOG_LEVEL];
@@ -134,7 +136,7 @@ logger.level = program.verbose ? LOG_LEVEL[program.verbose]: LOG_LEVEL[DEFAULT_L
         logger.error(`unsupport date format`);
         return;
     }
-    
+
     if (program.sessionMaskSeed === undefined) {
         program.optionMissingArgument({ flags: "     --sessionMaskSeed <STRING>" });
     }
