@@ -6,17 +6,16 @@ const log4js = require("log4js");
 const logger = log4js.getLogger("app");
 
 class MongoWritable extends Writable {
-
-    constructor(options) {
+    /** @param {{updateIntervalMilliseconds:? number}} option */
+    constructor(option = {}) {
 
         super({
 
             objectMode: true,
 
             write: async (salt, _encoding, callback) => {
-
                 try {
-                    await new Promise(resolve => setTimeout(resolve, 3000));
+                    await new Promise(resolve => setTimeout(resolve, option.updateIntervalMilliseconds));
                     await this.update(salt);
                 } catch (e) {
 

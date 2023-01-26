@@ -19,7 +19,8 @@
       "db": "sodium",
       "url": "mongodb://localhost:27017",
       "saltCollection": "salt",
-      "batchCollection": "batch"
+      "batchCollection": "batch",
+      "updateIntervalMilliseconds": 1000
     }
   },
   "mask": {
@@ -29,13 +30,6 @@
     "youtube": {
       "min": 100
     }
-  },
-  "interval": {
-    "aggregate": 86400000,
-    "update": 10000,
-    "insert": 300000,
-    "remove": 600000,
-    "stats": 300000
   },
   "verbose": 0
 }
