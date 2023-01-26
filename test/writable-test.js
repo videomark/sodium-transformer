@@ -71,11 +71,7 @@ describe("writable test", () => {
                 video: "video2"
             }]
 
-            mw = new MongoWritable({
-                mongoURL: url,
-                mongoDB: dbName,
-                mongoCollection: collectionName
-            })
+            mw = new MongoWritable();
 
             try {
                 client = await mongodb.MongoClient.connect(url, {
@@ -117,7 +113,7 @@ describe("writable test", () => {
 
                 assert.fail(e);
             }
-            
+
         }).timeout(15000);
 
         afterEach(async () => {

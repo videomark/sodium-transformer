@@ -45,6 +45,7 @@ const DEFAULT_OUTPUT_MONGO_DB = config.get("output.mongo.db");
 const DEFAULT_OUTPUT_MONGO_URL = config.get("output.mongo.url");
 const DEFAULT_OUTPUT_MONGO_SALT_COLLECTION = config.get("output.mongo.saltCollection");
 const DEFAULT_OUTPUT_MONGO_BATCH_COLLECTION = config.get("output.mongo.batchCollection");
+const DEFAULT_OUTPUT_MONGO_UPDATE_INTERVAL = Number(config.get("output.mongo.updateIntervalMilliseconds"));
 
 const DEFAULT_OUTPUT_DIRECTORY = ".";
 
@@ -218,7 +219,9 @@ async function pipeline(read, name) {
             }));
         }
 
-        const mongo = new MongoWritable(program);
+        const mongo = new MongoWritable({
+            updateIntervalMilliseconds: DEFAULT_OUTPUT_MONGO_UPDATE_INTERVAL,
+        });
         mongo.init(mongoSaltCollection);
         task.push(new Promise((resolve, reject) => {
             cachedThrough

@@ -19,7 +19,8 @@
       "db": "sodium",
       "url": "mongodb://localhost:27017",
       "saltCollection": "salt",
-      "batchCollection": "batch"
+      "batchCollection": "batch",
+      "updateIntervalMilliseconds": 1000
     }
   },
   "mask": {
