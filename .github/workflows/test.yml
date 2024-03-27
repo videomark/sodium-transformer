@@ -5,11 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mongo:
-        image: mongo@sha256:20f3adcaffe2193e49dd502c8299b770d49a1e0643e0e9db250d5c127b1e9ed8
+        image: mongo@sha256:0e145625e78b94224d16222ff2609c4621ff6e2c390300e4e6bf698305596792
         ports: ["27017:27017"]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: "npm"
