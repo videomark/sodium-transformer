@@ -2,6 +2,8 @@ const { Transform } = require('stream');
 const log4js = require("log4js");
 const NodeCache = require("node-cache");
 const UAParser = require("ua-parser-js");
+const fs = require('fs');
+const path = require('path'); 
 // eslint-disable-next-line camelcase
 const holiday_jp = require("@holiday-jp/holiday_jp");
 const getSessionType = require("../utils/getSessionType");
@@ -83,6 +85,35 @@ class SaltTransform extends Transform {
             let sessionType = getSessionType(session.session);
             if ("sessionType" in session) sessionType = session.sessionType;
 
+            // clientNote.json を読み込む
+            const clientNoteFilePath = path.resolve(__dirname, '../../test-data/clientNote.json');
+            let clientNoteData = {};
+
+            try {
+                const fileContent = fs.readFileSync(clientNoteFilePath, 'utf-8');
+                clientNoteData = JSON.parse(fileContent);
+            } catch (err) {
+                if (err.code === 'ENOENT') {
+                    logger.error("clientNote.json file not found");
+                } else if (err.name === 'SyntaxError') {
+                    logger.error(`Invalid JSON format in clientNote.json: ${err.message}`);
+                } else {
+                    logger.error(`Unexpected error reading clientNote.json: ${err}`);
+                }
+            }
+
+            // SessionID と一致する ISP と Prefecture を取得
+            const hostToIsp = {};
+            Object.entries(clientNoteData).forEach(([hostnameFile, entry]) => {
+                hostToIsp[hostnameFile.toLowerCase()] = {
+                    isp: entry.ISP,
+                    prefecture: entry.Prefecture
+                };
+            });
+            
+
+            const { isp, prefecture } = hostToIsp[session.session] || { isp: "UnknownISP", prefecture: "UnknownPrefecture" };
+
             const salt = {
                 session: {
                     sodiumSessionId: session.session,
@@ -93,7 +124,11 @@ class SaltTransform extends Transform {
                         original: session.userAgent
                     },
                     type: sessionType,
-                    location: session.location
+                    location: session.location,
+                    clientNote: {
+                        isp,
+                        prefecture,
+                      },
                 },
                 connection: {
                     type: session.netinfo ? session.netinfo.type : undefined,
@@ -332,6 +367,7 @@ class SaltTransform extends Transform {
         if (!Array.isArray(playback_quality) || playback_quality.length === 0) return [];
 
         let l = last;
+        // eslint-disable-next-line camelcase
         return playback_quality
             .filter(e => e.representation && e.creationDate)
             .map(e => {
@@ -369,7 +405,7 @@ class SaltTransform extends Transform {
 
      // eslint-disable-next-line camelcase
      static generateRepresentationHistoryFromProperty(property, last) {
-        if (last.videoWidth != property.videoWidth && last.videoHeight != property.videoHeight) {
+        if (last.videoWidth !== property.videoWidth && last.videoHeight !== property.videoHeight) {
             return [{
                 video: -1,
                 audio: -1,
@@ -377,6 +413,7 @@ class SaltTransform extends Transform {
                 videoHeight: property.videoHeight,
                 time: property.playStartTime + (property.currentPlayTime * 1000)
             }]
+        // eslint-disable-next-line no-else-return
         } else {
             return [];
         }
