@@ -6,6 +6,9 @@ const UAParser = require("ua-parser-js");
 const holiday_jp = require("@holiday-jp/holiday_jp");
 const getSessionType = require("../utils/getSessionType");
 
+const fs = require('fs');
+const path = require('path'); 
+
 const logger = log4js.getLogger("app");
 
 class SaltTransform extends Transform {
@@ -83,6 +86,35 @@ class SaltTransform extends Transform {
             let sessionType = getSessionType(session.session);
             if ("sessionType" in session) sessionType = session.sessionType;
 
+            // clientNote.json を読み込む
+            const clientNoteFilePath = path.resolve(__dirname, '../../test-data/clientNote.json');
+            let clientNoteData = {};
+
+            try {
+                const fileContent = fs.readFileSync(clientNoteFilePath, 'utf-8');
+                clientNoteData = JSON.parse(fileContent);
+            } catch (err) {
+                if (err.code === 'ENOENT') {
+                    logger.error("clientNote.json file not found");
+                } else if (err.name === 'SyntaxError') {
+                    logger.error(`Invalid JSON format in clientNote.json: ${err.message}`);
+                } else {
+                    logger.error(`Unexpected error reading clientNote.json: ${err}`);
+                }
+            }
+
+            // SessionID と一致する ISP と Prefecture を取得
+            const hostToIsp = {};
+            Object.entries(clientNoteData).forEach(([hostnameFile, entry]) => {
+                hostToIsp[hostnameFile.toLowerCase()] = {
+                    isp: entry.ISP,
+                    prefecture: entry.Prefecture
+                };
+            });
+
+
+            const { isp, prefecture } = hostToIsp[session.session] || { isp: "UnknownISP", prefecture: "UnknownPrefecture" };
+
             const salt = {
                 session: {
                     sodiumSessionId: session.session,
@@ -93,7 +125,11 @@ class SaltTransform extends Transform {
                         original: session.userAgent
                     },
                     type: sessionType,
-                    location: session.location
+                    location: session.location,
+                    clientNote: {
+                        isp,
+                        prefecture,
+                    },
                 },
                 connection: {
                     type: session.netinfo ? session.netinfo.type : undefined,
