@@ -94,26 +94,23 @@ class SaltTransform extends Transform {
                 const fileContent = fs.readFileSync(clientNoteFilePath, 'utf-8');
                 clientNoteData = JSON.parse(fileContent);
             } catch (err) {
-                if (err.code === 'ENOENT') {
-                    logger.error("clientNote.json file not found");
-                } else if (err.name === 'SyntaxError') {
-                    logger.error(`Invalid JSON format in clientNote.json: ${err.message}`);
-                } else {
-                    logger.error(`Unexpected error reading clientNote.json: ${err}`);
-                }
+                logger.error(`Error reading or parsing clientNote.json: ${err.message}`);
             }
 
             // SessionID と一致する ISP と Prefecture を取得
             const hostToIsp = {};
-            Object.entries(clientNoteData).forEach(([hostnameFile, entry]) => {
+            for (const [hostnameFile, entry] of Object.entries(clientNoteData)) {
                 hostToIsp[hostnameFile.toLowerCase()] = {
-                    isp: entry.ISP,
-                    prefecture: entry.Prefecture
+                ...entry,
+                // キーが存在するが値が記録されていない場合unknown
+                isp: entry.ISP || "UnknownISP",
+                prefecture: entry.Prefecture || "UnknownPrefecture"
                 };
-            });
+            }
 
 
-            const { isp, prefecture } = hostToIsp[session.session] || { isp: "UnknownISP", prefecture: "UnknownPrefecture" };
+
+            // const { isp, prefecture } = hostToIsp[session.session] || { isp: "UnknownISP", prefecture: "UnknownPrefecture" };
 
             const salt = {
                 session: {
@@ -126,10 +123,6 @@ class SaltTransform extends Transform {
                     },
                     type: sessionType,
                     location: session.location,
-                    clientNote: {
-                        isp,
-                        prefecture,
-                    },
                 },
                 connection: {
                     type: session.netinfo ? session.netinfo.type : undefined,
@@ -170,6 +163,31 @@ class SaltTransform extends Transform {
                 }
             }
 
+            if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(session.session)) {
+                // UUID形式でない場合
+                if (session.session.startsWith('ncom')) {
+                  // 'ncom'から始まる場合
+                  const deviceName = session.session.split('.')[0];
+
+                  // 不一致ならUnknown
+                  const ispInfo = hostToIsp[deviceName.toLowerCase()] || { isp: "UnknownISP", prefecture: "UnknownPrefecture" };
+
+                  // `ISP`と`Prefecture`のキーを`isp`と`prefecture`に変換
+                  const clientNote = {
+                    ...ispInfo,
+                    isp: ispInfo.ISP || "UnknownISP",
+                    prefecture: ispInfo.Prefecture || "UnknownPrefecture"
+                  };
+                  
+                  // `ISP`と`Prefecture`のキーを削除
+                  delete clientNote.ISP;
+                  delete clientNote.Prefecture;
+                
+                  // `clientNote` を追加
+                  salt.clientNote = clientNote;
+                }
+            }
+            
             this.cache.set(cacheKey, { salt, ctx: { cm } });
 
             return salt;
