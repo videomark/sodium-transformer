@@ -77,6 +77,7 @@ class MongoWritable extends Writable {
         }, {
             "$set": {
                 ...flatten({ session: salt.session }),
+                clientNote: salt.clientNote,
                 connection: salt.connection,
                 network: salt.network,
                 video: salt.video,
