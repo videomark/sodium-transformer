@@ -7,7 +7,7 @@ const crypto = require("crypto")
 const process = require("process");
 const { PassThrough, Transform, Writable, Readable } = require("stream");
 
-const program = require("commander");
+const { program } = require("commander");
 const config = require("config");
 const log4js = require("log4js");
 const mongodb = require("mongodb");
