@@ -87,7 +87,7 @@ class SaltTransform extends Transform {
             if ("sessionType" in session) sessionType = session.sessionType;
 
             // clientNote.json を読み込む
-            const clientNoteFilePath = path.resolve(__dirname, '../../test-data/clientNote.json');
+            const clientNoteFilePath = path.resolve('/opt/sodium/data/clientNote.json');
             let clientNoteData = {};
 
             try {
